@@ -1,0 +1,11 @@
+/* Distribution of student enrollments by course */
+
+SELECT C.COURSE_ID AS "COURSE", 
+       SUM(CASE 
+               WHEN E.ENROLLMENT_ID IS NOT NULL THEN 1 
+               ELSE 0 
+           END) AS "ENROLLMENTS"
+FROM COURSES_SM C
+LEFT JOIN ENROLLMENTS_SM E ON C.COURSE_ID = E.COURSE
+GROUP BY C.COURSE_ID
+ORDER BY "ENROLLMENTS" DESC;
